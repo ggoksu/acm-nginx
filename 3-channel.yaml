@@ -7,4 +7,4 @@ metadata:
     app: nginx-app-details
 spec:
   type: GitHub
-  pathname: https://kubernetes-charts.storage.googleapis.com/
+  pathname: https://github.com/ggoksu/acm-nginx.git
