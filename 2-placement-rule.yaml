@@ -1,0 +1,9 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: dev-cluster
+  namespace: nginx-demo
+spec:
+  clusterSelector:
+    matchLabels:
+      environment: dev
