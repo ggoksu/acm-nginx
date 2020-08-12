@@ -5,10 +5,6 @@ metadata:
     alpha.image.policy.openshift.io/resolve-names: '*'
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: 'https://github.com/ggoksu/node-app.git'
-    deployment.kubernetes.io/revision: '4'
-    image.openshift.io/triggers: >-
-      [{"from":{"kind":"ImageStreamTag","name":"node-app-git:latest","namespace":"nginx-demo"},"fieldPath":"spec.template.spec.containers[?(@.name==\"node-app-git\")].image","pause":"false"}]
-    openshift.io/generated-by: OpenShiftWebConsole
   selfLink: /apis/apps/v1/namespaces/nginx-demo/deployments/node-app-git
   resourceVersion: '549864'
   name: node-app-git
