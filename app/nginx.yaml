@@ -11,7 +11,7 @@ metadata:
     openshift.io/generated-by: OpenShiftWebConsole
   selfLink: /apis/apps/v1/namespaces/nginx-demo/deployments/node-app-git
   resourceVersion: '549864'
-  name: node-app-git-new-name
+  name: node-app-git
   uid: c4851430-725f-4489-8856-e9fca6532de4
   namespace: nginx-demo
   labels:
