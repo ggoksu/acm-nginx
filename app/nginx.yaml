@@ -12,7 +12,6 @@ metadata:
   selfLink: /apis/apps/v1/namespaces/nginx-demo/deployments/node-app-git
   resourceVersion: '549864'
   name: node-app-git
-  uid: c4851430-725f-4489-8856-e9fca6532de4
   namespace: nginx-demo
   labels:
     app: node-app-git
@@ -71,7 +70,6 @@ metadata:
   selfLink: /api/v1/namespaces/nginx-demo/services/node-app-git
   resourceVersion: '547171'
   name: node-app-git
-  uid: 2347f8fd-6808-4667-ace2-aeb1b0522a9c
   namespace: nginx-demo
   labels:
     app: node-app-git
@@ -102,7 +100,6 @@ metadata:
   selfLink: /apis/route.openshift.io/v1/namespaces/nginx-demo/routes/node-app-git
   resourceVersion: '547192'
   name: node-app-git
-  uid: c409f697-7235-4e88-a38f-fb157e7a7482
   namespace: nginx-demo
   labels:
     app: node-app-git
