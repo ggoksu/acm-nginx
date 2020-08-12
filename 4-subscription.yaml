@@ -8,7 +8,7 @@ metadata:
   annotations:
     apps.open-cluster-management.io/github-path: app
 spec:
-  channel: nginx-demo/predev-ch
+  channel: nginx-demo/dev-ch
   placement:
     placementRef:
       kind: PlacementRule
