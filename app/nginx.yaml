@@ -1,57 +1,125 @@
----
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
-metadata:
-  name: nginx
-  namespace: nginx-demo
-spec:
-  strategy:
-    type: Recreate
-  selector:
-    matchLabels:
-      app: nginx
-  replicas: 3 # tells deployment to run 1 pods matching the template
-  template: # create pods using pod definition in this template
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx
-  namespace: nginx-demo
-  labels:
-    app: nginx
-spec:
-  ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: nginx
-  type: ClusterIP
----
-apiVersion: route.openshift.io/v1
-kind: Route
+apiVersion: apps/v1
 metadata:
   annotations:
-    openshift.io/host.generated: "true"
+    alpha.image.policy.openshift.io/resolve-names: '*'
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: 'https://github.com/ggoksu/node-app.git'
+    deployment.kubernetes.io/revision: '4'
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"node-app-git:latest","namespace":"nginx-demo"},"fieldPath":"spec.template.spec.containers[?(@.name==\"node-app-git\")].image","pause":"false"}]
+    openshift.io/generated-by: OpenShiftWebConsole
+  selfLink: /apis/apps/v1/namespaces/nginx-demo/deployments/node-app-git
+  resourceVersion: '549864'
+  name: node-app-git
+  uid: c4851430-725f-4489-8856-e9fca6532de4
+  generation: 4
+  namespace: nginx-demo
   labels:
-    app: nginx
-  name: nginx-route
+    app: node-app-git
+    app.kubernetes.io/component: node-app-git
+    app.kubernetes.io/instance: node-app-git
+    app.kubernetes.io/name: nodejs
+    app.kubernetes.io/part-of: node-app-git-app
+    app.openshift.io/runtime: nodejs
+    app.openshift.io/runtime-version: '12'
 spec:
-  path: /
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-app-git
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: node-app-git
+        deploymentconfig: node-app-git
+    spec:
+      containers:
+        - name: node-app-git
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/nginx-demo/node-app-git@sha256:c55df99fa57fe3f1f6b37067ecae9ff177e46d82c5aeda069adcbba266c478da
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: PORT
+              value: '8080'
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+---
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: 'https://github.com/ggoksu/node-app.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  selfLink: /api/v1/namespaces/nginx-demo/services/node-app-git
+  resourceVersion: '547171'
+  name: node-app-git
+  uid: 2347f8fd-6808-4667-ace2-aeb1b0522a9c
+  namespace: nginx-demo
+  labels:
+    app: node-app-git
+    app.kubernetes.io/component: node-app-git
+    app.kubernetes.io/instance: node-app-git
+    app.kubernetes.io/name: nodejs
+    app.kubernetes.io/part-of: node-app-git-app
+    app.openshift.io/runtime: nodejs
+    app.openshift.io/runtime-version: '12'
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: node-app-git
+    deploymentconfig: node-app-git
+  clusterIP: 172.30.145.117
+  type: ClusterIP
+  sessionAffinity: None
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+  selfLink: /apis/route.openshift.io/v1/namespaces/nginx-demo/routes/node-app-git
+  resourceVersion: '547192'
+  name: node-app-git
+  uid: c409f697-7235-4e88-a38f-fb157e7a7482
+  namespace: nginx-demo
+  labels:
+    app: node-app-git
+    app.kubernetes.io/component: node-app-git
+    app.kubernetes.io/instance: node-app-git
+    app.kubernetes.io/name: nodejs
+    app.kubernetes.io/part-of: node-app-git-app
+    app.openshift.io/runtime: nodejs
+    app.openshift.io/runtime-version: '12'
+spec:
+  host: node-app-git-nginx-demo.apps.managed-cluster-aws.c0b5.sandbox6.opentlc.com
   to:
     kind: Service
-    name: nginx
+    name: node-app-git
     weight: 100
   port:
-    targetPort: 80
+    targetPort: 8080-tcp
+  wildcardPolicy: None
+
