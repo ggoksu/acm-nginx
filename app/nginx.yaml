@@ -38,7 +38,7 @@ spec:
       containers:
         - name: node-app-git
           image: >-
-            quay.io/ggoksu/node:latest
+            ggoksu/node-app-git:latest 
           ports:
             - containerPort: 8080
               protocol: TCP
