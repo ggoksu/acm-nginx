@@ -38,7 +38,7 @@ spec:
       containers:
         - name: node-app-git
           image: >-
-            image-registry.openshift-image-registry.svc:5000/nginx-demo/node-app-git@sha256:c55df99fa57fe3f1f6b37067ecae9ff177e46d82c5aeda069adcbba266c478da
+            quay.io/ggoksu/node:latest
           ports:
             - containerPort: 8080
               protocol: TCP
