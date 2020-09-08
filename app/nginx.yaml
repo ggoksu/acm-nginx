@@ -84,7 +84,6 @@ spec:
   selector:
     app: node-app-git
     deploymentconfig: node-app-git
-  clusterIP: 172.30.145.117
   type: ClusterIP
   sessionAffinity: None
 ---
