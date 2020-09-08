@@ -106,7 +106,6 @@ metadata:
     app.openshift.io/runtime: nodejs
     app.openshift.io/runtime-version: '12'
 spec:
-  host: node-app-git-nginx-demo.apps.managed-cluster-aws.c0b5.sandbox6.opentlc.com
   to:
     kind: Service
     name: node-app-git
