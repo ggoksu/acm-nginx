@@ -18,7 +18,7 @@ metadata:
     app.openshift.io/runtime: nodejs
     app.openshift.io/runtime-version: '12'
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: node-app-git
@@ -81,10 +81,6 @@ spec:
       protocol: TCP
       port: 8080
       targetPort: 8080
-    - name: 9090-tcp
-      protocol: TCP
-      port: 9090
-      targetPort: 9090  
   selector:
     app: node-app-git
     deploymentconfig: node-app-git
