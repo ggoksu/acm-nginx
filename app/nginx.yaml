@@ -5,8 +5,6 @@ metadata:
     alpha.image.policy.openshift.io/resolve-names: '*'
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: 'https://github.com/ggoksu/node-app.git'
-  selfLink: /apis/apps/v1/namespaces/nginx-demo/deployments/node-app-git
-  resourceVersion: '549864'
   name: node-app-git
   namespace: nginx-demo
   labels:
@@ -24,7 +22,6 @@ spec:
       app: node-app-git
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: node-app-git
         deploymentconfig: node-app-git
@@ -63,8 +60,6 @@ metadata:
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: 'https://github.com/ggoksu/node-app.git'
     openshift.io/generated-by: OpenShiftWebConsole
-  selfLink: /api/v1/namespaces/nginx-demo/services/node-app-git
-  resourceVersion: '547171'
   name: node-app-git
   namespace: nginx-demo
   labels:
@@ -96,8 +91,6 @@ apiVersion: route.openshift.io/v1
 metadata:
   annotations:
     openshift.io/host.generated: 'true'
-  selfLink: /apis/route.openshift.io/v1/namespaces/nginx-demo/routes/node-app-git
-  resourceVersion: '547192'
   name: node-app-git
   namespace: nginx-demo
   labels:
@@ -116,4 +109,3 @@ spec:
   port:
     targetPort: 8080-tcp
   wildcardPolicy: None
-
