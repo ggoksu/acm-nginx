@@ -109,9 +109,3 @@ spec:
   port:
     targetPort: 8080-tcp
   wildcardPolicy: None
----
-apiVersion: multicluster.x-k8s.io/v1alpha1
-kind: ServiceExport
-metadata:
-  name: node-app-git
-  namespace: nginx-demo
