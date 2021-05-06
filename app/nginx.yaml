@@ -1,20 +1,8 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  annotations:
-    alpha.image.policy.openshift.io/resolve-names: '*'
-    app.openshift.io/vcs-ref: master
-    app.openshift.io/vcs-uri: 'https://github.com/ggoksu/node-app.git'
   name: node-app-git
   namespace: nginx-demo
-  labels:
-    app: node-app-git
-    app.kubernetes.io/component: node-app-git
-    app.kubernetes.io/instance: node-app-git
-    app.kubernetes.io/name: nodejs
-    app.kubernetes.io/part-of: node-app-git-app
-    app.openshift.io/runtime: nodejs
-    app.openshift.io/runtime-version: '12'
 spec:
   replicas: 1
   selector:
@@ -56,20 +44,8 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  annotations:
-    app.openshift.io/vcs-ref: master
-    app.openshift.io/vcs-uri: 'https://github.com/ggoksu/node-app.git'
-    openshift.io/generated-by: OpenShiftWebConsole
   name: node-app-git
   namespace: nginx-demo
-  labels:
-    app: node-app-git
-    app.kubernetes.io/component: node-app-git
-    app.kubernetes.io/instance: node-app-git
-    app.kubernetes.io/name: nodejs
-    app.kubernetes.io/part-of: node-app-git-app
-    app.openshift.io/runtime: nodejs
-    app.openshift.io/runtime-version: '12'
 spec:
   ports:
     - name: 8080-tcp
@@ -93,14 +69,6 @@ metadata:
     openshift.io/host.generated: 'true'
   name: node-app-git
   namespace: nginx-demo
-  labels:
-    app: node-app-git
-    app.kubernetes.io/component: node-app-git
-    app.kubernetes.io/instance: node-app-git
-    app.kubernetes.io/name: nodejs
-    app.kubernetes.io/part-of: node-app-git-app
-    app.openshift.io/runtime: nodejs
-    app.openshift.io/runtime-version: '12'
 spec:
   to:
     kind: Service
