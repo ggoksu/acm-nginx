@@ -1,6 +1,8 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
+  annotations:
+    myann: hello
   name: node-app-git
   namespace: nginx-demo
 spec:
