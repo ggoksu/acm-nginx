@@ -1,0 +1,65 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    myann: hello
+  name: node-app-git
+  namespace: nginx-demo
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: node-app-git
+  template:
+    metadata:
+      labels:
+        app: node-app-git
+        deploymentconfig: node-app-git
+    spec:
+      containers:
+        - name: node-app-git
+          image: >-
+            ggoksu/node-app-git:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: PORT
+              value: '8080'
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: node-app-git
+  namespace: nginx-demo
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8081-tcp
+      port: 8081
+      targetPort: 8081
+      protocol: TCP
+  selector:
+    app: node-app-git
+    deploymentconfig: node-app-git
+  type: ClusterIP
+  sessionAffinity: None
