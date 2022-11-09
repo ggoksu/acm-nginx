@@ -6,7 +6,7 @@ metadata:
   name: node-app-git
   namespace: nginx-demo
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: node-app-git
