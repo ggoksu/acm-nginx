@@ -4,7 +4,6 @@ metadata:
   annotations:
     myann: hello
   name: node-app-git
-  namespace: nginx-demo
 spec:
   replicas: 3
   selector:
