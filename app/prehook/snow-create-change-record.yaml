@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: book-import2
 spec:
   tower_auth_secret: aapaccess
-  job_template_name: snow-create-change-record
+  job_template_name: test
   extra_vars:
     app_name: bookimport
     change_request:
