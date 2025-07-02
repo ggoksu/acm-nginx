@@ -46,7 +46,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: node-app-git
-  namespace: nginx-demo
 spec:
   ports:
     - name: 8080-tcp
@@ -69,7 +68,6 @@ metadata:
   annotations:
     openshift.io/host.generated: 'true'
   name: node-app-git
-  namespace: nginx-demo
 spec:
   to:
     kind: Service
