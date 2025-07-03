@@ -5,7 +5,7 @@ metadata:
     myann: hello
   name: node-app-git
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: node-app-git
